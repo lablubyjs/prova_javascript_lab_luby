@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TGL</title>
+  </head>
+  <body>
+    <header>
+      <a>TGL</a>
+      <a>Home</a>
+      <a>Account</a>
+      <a>Logout</a>
+    </header>
+
+    <main>
+      <section class="game-bar">
+        <div class="info-game-bar">
+          <h1>new bet for mega sena</h1>
+          <h3>Choose a game</h3>
+          <div class="buttons-game" data-js="buttons-games"></div>
+          <p data-js="description-game"></p>
+        </div>
+
+        <div class="buttons-game-range" data-js="buttons-game-range"></div>
+
+        <div class="buttons-game-bar-settings">
+          <button data-js="complete-game">Complete game</button>
+          <button data-js="clear-game">Clear game</button>
+          <button data-js="cart-game">Add to Cart</button>
+        </div>
+      </section>
+
+      <hr />
+
+      <section class="game-cart">
+        <div class="game-cart-info">
+          <h1>Cart</h1>
+        </div>
+
+        <div class="game-cart-games" data-js="games-in-cart">
+        </div>
+
+        <div class="game-cart-total">
+          <p>CART Total</p>
+          <span data-js="total-cart"></span>
+        </div>
+
+        <div class="cart-save">
+          <button data-js="save">Save</button>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Copyright 2020 Luby Software</p>
+    </footer>
+
+    <script src="../src/utils/DOM.js"></script>
+    <script src="../src/app.js"></script>
+  </body>
+</html>
