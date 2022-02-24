@@ -4,51 +4,79 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../src/styles/global.css" />
+    <link rel="stylesheet" href="../src/styles/header-footer.css" />
+    <link rel="stylesheet" href="../src/styles/game.css" />
+    <link rel="stylesheet" href="../src/styles/cart.css" />
     <title>TGL</title>
   </head>
   <body>
     <header>
-      <a>TGL</a>
-      <a>Home</a>
-      <a>Account</a>
-      <a>Logout</a>
+      <div class="left">
+        <a id="tgl">TGL </a>
+        <a>Home</a>
+      </div>
+      <div class="right">
+        <a>Account</a>
+        <a>Logout <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
     </header>
 
     <main>
       <section class="game-bar">
         <div class="info-game-bar">
-          <h1>new bet for <span data-js="game-name"></span></h1>
+          <h1>
+            <strong>new</strong> bet for <span data-js="game-name"></span>
+          </h1>
           <h3>Choose a game</h3>
           <div class="buttons-game" data-js="buttons-games"></div>
+          <span>Fill your bet</span>
           <p data-js="description-game"></p>
         </div>
 
         <div class="buttons-game-range" data-js="buttons-game-range"></div>
 
         <div class="buttons-game-bar-settings">
-          <button data-js="complete-game">Complete game</button>
-          <button data-js="clear-game">Clear game</button>
-          <button data-js="cart-game">Add to Cart</button>
+          <div>
+            <button data-js="complete-game" id="complete-game">
+              Complete game
+            </button>
+            <button data-js="clear-game" id="clear-game">Clear game</button>
+          </div>
+          <div>
+            <button data-js="cart-game" id="add-to-cart">
+              <i class="fa-solid fa-cart-shopping"></i>
+              Add to Cart
+            </button>
+          </div>
         </div>
       </section>
 
-      <hr />
-
       <section class="game-cart">
-        <div class="game-cart-info">
-          <h1>Cart</h1>
-        </div>
+        <div class="cart">
+          <div class="game-cart-info">
+            <h1>Cart</h1>
+          </div>
 
-        <div class="game-cart-games" data-js="games-in-cart">
-        </div>
+          <div class="game-cart-games" data-js="games-in-cart"></div>
 
-        <div class="game-cart-total">
-          <p>CART Total</p>
-          <span data-js="total-cart"></span>
-        </div>
+          <div class="game-cart-total">
+            <p><strong>CART</strong> Total</p>
+            <span data-js="total-cart"></span>
+          </div>
 
-        <div class="cart-save">
-          <button data-js="save">Save</button>
+          <div class="cart-save">
+            <button data-js="save">
+              Save <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
         </div>
       </section>
     </main>
