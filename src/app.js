@@ -10,7 +10,6 @@
          },
 
          initEvents: function () {
-            console.log('Init Events');
             this.games = {
                total: 0
             };
@@ -50,19 +49,31 @@
 
             for (let type in games.types) {
                let $button = document.createElement('button');
+
                $button.textContent = games.types[type].type;
+               $button.style.borderColor = games.types[type].color;
+               $button.style.color = games.types[type].color;
+
                $button.addEventListener('click', () => {
                   this.gameName = games.types[type].type;
                   this.gameRange = games.types[type].range;
                   this.gamePrice = games.types[type].price;
                   this.gameMaxNumber = games.types[type]['max-number'];
                   this.gameColor = games.types[type].color;
-                  this.gameNumbers = [];
-                  
+                  this.gameNumbers = Array();
+
+                  app.isNotSelected($button.parentNode.children[0], '#7F3992');
+                  app.isNotSelected($button.parentNode.children[1], '#01AC66');
+                  app.isNotSelected($button.parentNode.children[2], '#F79C31');
+
+                  app.isSelected($button);
+
                   $spanGameName.textContent = games.types[type].type;
+
                   this.setDescriptionGame(games.types[type].description);
                   this.setRangeGame(games.types[type].range);
                });
+
                $buttonsGames.appendChild($button);
             }
 
@@ -79,16 +90,20 @@
 
             for (let i = 0; i < range; i++) {
                let $buttonNumber = document.createElement('button');
+
                $buttonNumber.textContent = i + 1;
                $buttonNumber.value = i + 1;
                $buttonNumber.id = i + 1;
+
                $buttonNumber.addEventListener('click', this.game);
+
                $buttonsGameRange.appendChild($buttonNumber);
             }
          },
 
          game: function () {
             if (app.gameNumbers.length < app.gameMaxNumber) {
+
                if (app.gameNumbers.indexOf(Number(this.value)) === -1) {
                   app.gameNumbers.push(Number(this.value));
                   app.isSelected(this);
@@ -97,32 +112,37 @@
                   app.isNotSelected(this);
                }
             }
-            else if (app.gameNumbers.length > app.gameMaxNumber) {
-               alert('Números máximos atingidos')
-            }
-            else {
+
+            else if (app.gameNumbers.indexOf(Number(this.value)) !== -1) {
                app.gameNumbers.splice(app.gameNumbers.indexOf(Number(this.value)), 1);
                app.isNotSelected(this)
             }
-            console.log('app', app.gameNumbers)
+
+            else {
+               alert(`Só é possível selecionar ${app.gameMaxNumber} números!`);
+            }
+
          },
 
          isSelected: function (button) {
             button.style.background = app.gameColor;
+            button.style.color = '#ffffff';
          },
 
-         isNotSelected: function (button) {
+         isNotSelected: function (button, color = '') {
             button.style.background = '';
+            button.style.color = color;
          },
 
          setCompleteGame: function () {
             let $buttonCompleteGame = $('[data-js="complete-game"]').get();
+
             $buttonCompleteGame.addEventListener('click', this.completeGame);
          },
 
          completeGame: function () {
-
             if (app.gameNumbers.length < app.gameMaxNumber) {
+
                while (app.gameNumbers.length < app.gameMaxNumber) {
                   let number = Math.floor((Math.random() * app.gameRange) + 1);
 
@@ -133,8 +153,9 @@
                   }
                }
             }
+
             else {
-               alert('Jogo já está completo');
+               alert('Jogo já está completo!');
             }
          },
 
@@ -148,6 +169,7 @@
                let $button = document.getElementById(`${app.gameNumbers[i]}`);
                app.isNotSelected($button);
             };
+
             app.gameNumbers = [];
          },
 
@@ -157,46 +179,58 @@
          },
 
          addToCart: function () {
-
             if (app.gameNumbers.length === app.gameMaxNumber) {
-               console.log('Adicionando ao carrinho...');
+
+               let $cart = $('[data-js="games-in-cart"]').get();
+               let $game = document.createElement('div');
+               let $buttonDelete = app.createButtonDelete();
+               let $gameInfo = document.createElement('div');
+               let $gameNameAndPrice = document.createElement('div');
+               let $numbers = document.createElement('span');
+               let $gameName = document.createElement('span');
+               let $gamePrice = document.createElement('span');
 
                if (app.games[app.gameName] === undefined) {
-                  app.games[app.gameName] = {
-                     Games: [app.gameNumbers],
-                     Price: app.gamePrice
-                  };
+                  app.createGame(app.gameName);
                } else {
                   app.games[app.gameName].Games.push(app.gameNumbers);
                }
 
                app.games.total += app.gamePrice;
 
-               console.log(app.games)
-               console.log(app.games.total)
+               app.sortGameNumbers();
 
-               let $cart = $('[data-js="games-in-cart"]').get();
+               app.createSpanNumbers($numbers);
 
-               let $game = document.createElement('div');
-               let $buttonDelete = app.createButtonDelete();
-               let $numbers = document.createElement('span');
-               let $gameName = document.createElement('span');
-               let $gamePrice = document.createElement('span');
-
-               $numbers.textContent = app.gameNumbers;
+               $gameName.style.color = app.gameColor;
                $gameName.textContent = app.gameName;
-               $gamePrice.textContent = `R$ ${app.gamePrice}`;
+               $gameName.style.fontStyle = 'italic';
+               $gameName.style.textTransform = 'capitalize';
+
+               $gameInfo.style.borderLeft = `3px solid ${app.gameColor}`;
+
+               $gamePrice.textContent = `${app.convertNumberToReal(app.gamePrice)}`;
+
+               $gameNameAndPrice.appendChild($gameName);
+               $gameNameAndPrice.appendChild($gamePrice);
+
+               $gameInfo.appendChild($numbers);
+               $gameInfo.appendChild($gameNameAndPrice);
+
+               $game.setAttribute('class', 'game');
+               $gameInfo.setAttribute('class', 'game-info');
+               $gameNameAndPrice.setAttribute('class', 'name-and-price');
+               $numbers.setAttribute('class', 'numbers');
 
                $game.appendChild($buttonDelete);
-               $game.appendChild($numbers);
-               $game.appendChild($gameName);
-               $game.appendChild($gamePrice);
+               $game.appendChild($gameInfo);
 
                $cart.appendChild($game);
 
                app.setTotalCart();
                app.clearGame();
             }
+
             else {
                alert('Complete o jogo para adicionar ao carrinho')
             }
@@ -204,27 +238,29 @@
 
          setTotalCart: function () {
             let $cartTotal = $('[data-js="total-cart"]').get();
-            $cartTotal.innerHTML = `R$ ${app.games.total}`;
+            $cartTotal.innerHTML = `${app.convertNumberToReal(app.games.total)}`;
          },
 
          createButtonDelete: function () {
-            let $button = document.createElement('button')
-            $button.textContent = 'Deletar';
-            $button.addEventListener('click', this.handleDeleteGame)
-            return $button;
+            let $div = document.createElement('div');
+            let $button = document.createElement('button');
+
+            $button.setAttribute('class', 'fa-solid fa-trash-can');
+            $div.setAttribute('class', 'game-trash')
+            $button.addEventListener('click', this.handleDeleteGame);
+
+            $div.appendChild($button);
+
+            return $div;
          },
 
          handleDeleteGame: function () {
-            console.log('Deletando do carrinho...')
-            let gameName = this.parentNode.childNodes[2].textContent;
-            let gameNumbers = this.parentNode.childNodes[1].textContent;
-
+            let gameName = this.parentNode.parentNode.childNodes[1].childNodes[1].childNodes[0].textContent;
             let $gamesInCart = $('[data-js="games-in-cart"]').get();
 
-            $gamesInCart.removeChild(this.parentNode);
+            $gamesInCart.removeChild(this.parentNode.parentNode);
 
             app.games.total -= app.games[gameName].Price;
-            app.games[gameName].Games.splice(app.games[gameName].Games.indexOf([gameNumbers]));
 
             app.setTotalCart();
          },
@@ -240,6 +276,37 @@
                alert('Compra realizada com sucesso! Obrigada.')
             }
             return app.games;
+         },
+
+         createSpanNumbers: function (button) {
+            for (let i = 0; i < app.gameNumbers.length; i++) {
+               let $number = document.createElement('span');
+               if (i < app.gameNumbers.length - 1)
+                  $number.textContent = `${app.gameNumbers[i]}, `;
+               else
+                  $number.textContent = app.gameNumbers[i];
+               button.appendChild($number);
+            }
+         },
+
+         sortGameNumbers: function () {
+            (app.gameNumbers).sort(function (a, b) {
+               if (a < b) {
+                  return -1;
+               }
+               return true;
+            })
+         },
+
+         createGame: function (gameName) {
+            app.games[gameName] = {
+               Games: [app.gameNumbers],
+               Price: app.gamePrice
+            }
+         },
+
+         convertNumberToReal: function (number) {
+            return number.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
          }
 
       }
