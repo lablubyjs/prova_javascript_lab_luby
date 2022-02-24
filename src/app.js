@@ -44,7 +44,8 @@
          },
 
          setButtonsGames: function (data) {
-            let $buttonsGames = $('[data-js="buttons-games"]').get()
+            let $buttonsGames = $('[data-js="buttons-games"]').get();
+            let $spanGameName = $('[data-js="game-name"]').get();
             let games = data;
 
             for (let type in games.types) {
@@ -57,7 +58,8 @@
                   this.gameMaxNumber = games.types[type]['max-number'];
                   this.gameColor = games.types[type].color;
                   this.gameNumbers = [];
-
+                  
+                  $spanGameName.textContent = games.types[type].type;
                   this.setDescriptionGame(games.types[type].description);
                   this.setRangeGame(games.types[type].range);
                });
