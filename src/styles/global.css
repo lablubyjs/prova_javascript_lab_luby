@@ -1,0 +1,41 @@
+@import url("http://fonts.cdnfonts.com/css/helvetica-neue-9");
+
+:root {
+  --white-color: #ffffff;
+  --background-color: #f7f7f7;
+  --text-color: #707070;
+  --border-color: #e2e2e2;
+  --border-color-tgl: #b5c401;
+  --button-number-color: #adc0c4;
+  --button-color: #27c383;
+  --button-save-background: #f4f4f4;
+  --trash-color: #888888;
+  --numbers-color: #868686;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue";
+}
+
+body {
+  width: 100vw;
+  background-color: var(--background-color);
+}
+
+main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding-top: 2rem;
+  width: 100%;
+  min-height: 31.25rem;
+}
+
+a,
+button {
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+}

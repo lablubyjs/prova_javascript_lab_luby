@@ -1,0 +1,119 @@
+.game-cart .cart {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 15rem;
+  min-height: 20rem;
+  background-color: var(--white-color);
+  border-radius: 0.6rem;
+  border: 1px solid var(--border-color);
+  font-style: italic;
+}
+
+.game-cart-info {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--text-color);
+  padding-left: 1rem;
+  padding-top: 2rem;
+  text-transform: uppercase;
+}
+
+.game-cart-games {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.game-cart-games .game {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.game-cart-games .game .game-trash {
+  padding-top: 1.5rem;
+}
+
+.game-cart-games .game .game-trash button {
+  color: var(--trash-color);
+}
+
+.game-cart-games .game .game-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 5rem;
+  margin-left: 0.5rem;
+}
+
+.game-cart-games .game .game-info span {
+  margin-left: 0.5rem;
+}
+
+.game-cart-games .game .game-info .numbers {
+  display: grid;
+  grid-template-columns: repeat(11, 1rem);
+  grid-auto-rows: 1rem;
+  align-content: center;
+  align-items: start;
+  justify-content: center;
+  justify-items: center;
+  color: var(--numbers-color);
+  width: 100%;
+  font-size: 0.7rem;
+}
+
+.game-cart-games .game .game-info .name-and-price {
+  font-size: 1rem;
+  color: var(--numbers-color);
+}
+
+.game-cart-games button {
+  background-color: transparent;
+  border: none;
+}
+
+.game-cart-games p {
+  width: 100%;
+}
+
+.game-cart-total {
+  display: flex;
+  justify-content: baseline;
+  padding-left: 1rem;
+  color: var(--text-color);
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.game-cart-total p strong {
+  font-style: italic;
+}
+
+.game-cart .cart .game-cart-total {
+  font-style: normal;
+  font-weight: normal;
+}
+
+.game-cart-total span {
+  padding-left: 0.5rem;
+}
+
+.game-cart .cart-save button {
+  width: 100%;
+  height: 6rem;
+  bottom: 0;
+  height: 6rem;
+  font-size: 2rem;
+  font-style: italic;
+  color: var(--button-color);
+  background-color: var(--button-save-background);
+  border: 1px solid var(--border-color);
+  outline: none;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}

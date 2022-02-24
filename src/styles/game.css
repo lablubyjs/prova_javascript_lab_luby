@@ -1,0 +1,117 @@
+.game-bar {
+  padding-left: 5rem;
+  color: var(--text-color);
+}
+
+.game-bar div {
+  padding: 1rem;
+}
+
+.info-game-bar {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-game-bar h1,
+span {
+  font-style: italic;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+.info-game-bar h3 {
+  margin-top: 1.9rem;
+  font-size: 17px;
+  font-style: italic;
+}
+
+.info-game-bar .buttons-game,
+div.buttons-game-range {
+  padding-left: 0;
+}
+
+.info-game-bar .buttons-game button {
+  font-style: italic;
+  font-size: 14px;
+  background-color: transparent;
+  border: 2px solid;
+  width: 6.9rem;
+  height: 2.1rem;
+  border-radius: 6.25rem;
+  margin-right: 0.9rem;
+}
+
+.info-game-bar span {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.info-game-bar span,
+p {
+  font-style: italic;
+}
+
+.info-game-bar p {
+  font-weight: normal;
+  margin-bottom: 0.3rem;
+}
+
+.buttons-game-range {
+  padding: 0;
+  display: grid;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  grid-template-columns: repeat(12, 4rem);
+  grid-auto-rows: 4rem;
+}
+
+.buttons-game-range button {
+  font-weight: normal;
+  font-size: 18px;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: var(--button-number-color);
+  color: var(--white-color);
+  border: none;
+}
+
+.buttons-game-bar-settings {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.buttons-game-bar-settings div {
+  padding: 0;
+}
+.buttons-game-bar-settings button {
+  height: 3.25rem;
+  border: 1px solid var(--button-color);
+  border-radius: 0.6rem;
+  font-weight: bold;
+  font-size: 1rem;
+  background-color: transparent;
+  color: var(--button-color);
+}
+
+.buttons-game-bar-settings #complete-game {
+  width: 10.25rem;
+}
+
+.buttons-game-bar-settings #clear-game {
+  width: 8.43rem;
+}
+
+.buttons-game-bar-settings #add-to-cart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 13.06rem;
+  background-color: var(--button-color);
+  color: var(--white-color);
+}
