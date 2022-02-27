@@ -11,7 +11,8 @@
 
          initEvents: function () {
             this.games = {
-               total: 0
+               total: 0,
+               buttons: []
             };
 
             this.getGames();
@@ -54,6 +55,13 @@
                $button.style.borderColor = games.types[type].color;
                $button.style.color = games.types[type].color;
 
+               app.games['buttons'].push({
+                  id: type,
+                  button: $button,
+                  color: games.types[type].color,
+                  isSelected: false
+               });
+
                $button.addEventListener('click', () => {
                   this.gameName = games.types[type].type;
                   this.gameRange = games.types[type].range;
@@ -62,10 +70,18 @@
                   this.gameColor = games.types[type].color;
                   this.gameNumbers = Array();
 
-                  app.isSelected($button);
+                  app.games['buttons'].forEach((element, index) => {
+                     if (element['id'] === type) {
+                        app.games['buttons'][index].isSelected = true;
+                     }
+                     else {
+                        app.games['buttons'][index].isSelected = false;
+                     }
+                  });
 
                   $spanGameName.textContent = games.types[type].type;
 
+                  this.setButtonsGamesColor();
                   this.setDescriptionGame(games.types[type].description);
                   this.setRangeGame(games.types[type].range);
                });
@@ -75,13 +91,26 @@
 
          },
 
+         setButtonsGamesColor: function () {
+            app.games['buttons'].forEach((element, index) => {
+               if (app.games['buttons'][index].isSelected === true) {
+                  app.games['buttons'][index].button.style.background = app.games['buttons'][index].color;
+                  app.games['buttons'][index].button.style.color = '#ffffff';
+               }
+               else {
+                  app.games['buttons'][index].button.style.background = '';
+                  app.games['buttons'][index].button.style.color = app.games['buttons'][index].color;
+               }
+            });
+         },
+
          setDescriptionGame: function (description) {
             const $descriptionGame = $('[data-js="description-game"]').get();
             $descriptionGame.innerHTML = description
          },
 
          setRangeGame: function (range) {
-            const $buttonsGameRange = $('[data-js="buttons-game-range"]').get();
+            const $buttonsGameRange = $('[data-js="game-range"]').get();
             $buttonsGameRange.innerHTML = ''
 
             for (let i = 0; i < range; i++) {
