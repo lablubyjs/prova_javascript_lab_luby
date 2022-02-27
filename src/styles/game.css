@@ -7,30 +7,42 @@
   padding: 1rem;
 }
 
-.info-game-bar {
+.game-bar .info {
   display: flex;
   flex-direction: column;
 }
 
-.info-game-bar h1,
-span {
+.game-bar .info .new-bet {
   font-style: italic;
   font-weight: normal;
   text-transform: uppercase;
 }
 
-.info-game-bar h3 {
+.game-bar .info .new-bet span {
+  font-weight: normal;
+}
+
+.info p {
+  text-transform: capitalize;
+}
+
+.game-bar .info h3 {
   margin-top: 1.9rem;
   font-size: 17px;
   font-style: italic;
 }
 
-.info-game-bar .buttons-game,
-div.buttons-game-range {
+.game-bar .info .buttons-games,
+div.game-range {
   padding-left: 0;
 }
 
-.info-game-bar .buttons-game button {
+
+div.game-range {
+  padding: 0 0 0 0.5rem;
+}
+
+.game-bar .info .buttons-games button {
   font-style: italic;
   font-size: 14px;
   background-color: transparent;
@@ -41,33 +53,27 @@ div.buttons-game-range {
   margin-right: 0.9rem;
 }
 
-.info-game-bar span {
+.game-bar .info span {
   font-weight: bold;
   margin-bottom: 0.3rem;
 }
 
-.info-game-bar span,
+.game-bar .info span,
 p {
   font-style: italic;
 }
 
-.info-game-bar p {
+.game-bar .info p {
   font-weight: normal;
   margin-bottom: 0.3rem;
 }
 
-.buttons-game-range {
+.game-range div {
   padding: 0;
-  display: grid;
-  align-content: center;
-  align-items: center;
-  justify-content: center;
-  justify-items: center;
-  grid-template-columns: repeat(12, 4rem);
-  grid-auto-rows: 4rem;
+  margin: 0;
 }
 
-.buttons-game-range button {
+.game-range button {
   font-weight: normal;
   font-size: 18px;
   width: 3rem;
@@ -76,19 +82,22 @@ p {
   background-color: var(--button-number-color);
   color: var(--white-color);
   border: none;
+  margin-inline: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.buttons-game-bar-settings {
+.game-bar-settings {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 0;
 }
 
-.buttons-game-bar-settings div {
+.game-bar-settings div {
   padding: 0;
+  margin-top: 0.5rem;
 }
-.buttons-game-bar-settings button {
+.game-bar-settings button {
   height: 3.25rem;
   border: 1px solid var(--button-color);
   border-radius: 0.6rem;
@@ -98,15 +107,15 @@ p {
   color: var(--button-color);
 }
 
-.buttons-game-bar-settings #complete-game {
+.game-bar-settings #complete-game {
   width: 10.25rem;
 }
 
-.buttons-game-bar-settings #clear-game {
+.game-bar-settings #clear-game {
   width: 8.43rem;
 }
 
-.buttons-game-bar-settings #add-to-cart {
+.game-bar-settings #add-to-cart {
   display: flex;
   justify-content: center;
   align-items: center;
