@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  max-width: 15rem;
+  max-width: 17rem;
   min-height: 20rem;
   background-color: var(--white-color);
   border-radius: 0.6rem;
@@ -10,7 +10,24 @@
   font-style: italic;
 }
 
-.game-cart-info {
+.game-cart .cart-empty {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: var(--trash-color);
+  padding: 2rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+.game-cart .cart-empty i {
+  color: var(--button-number-color);
+  font-size: 3rem;
+}
+
+.game-cart .info {
   font-style: italic;
   font-weight: bold;
   font-size: 1rem;
@@ -20,29 +37,44 @@
   text-transform: uppercase;
 }
 
-.game-cart-games {
+.games {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 1rem;
+  max-height: 25rem;
 }
 
-.game-cart-games .game {
+.games::-webkit-scrollbar {
+  width: 3.5px;
+}
+
+.games::-webkit-scrollbar-track {
+  border-radius: 20px;
+  background-color: var(--border-color);
+}
+
+.games::-webkit-scrollbar-thumb {
+  background-color: var(--button-number-color); 
+  border-radius: 20px;
+}
+
+.games .game {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 2.5fr 1fr;
   justify-content: space-between;
   margin-top: 1rem;
 }
 
-.game-cart-games .game .game-trash {
+.games .game .game-trash {
   padding-top: 1.5rem;
 }
 
-.game-cart-games .game .game-trash button {
+.games .game .game-trash button {
   color: var(--trash-color);
 }
 
-.game-cart-games .game .game-info {
+.games .game .game-info {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -50,11 +82,11 @@
   margin-left: 0.5rem;
 }
 
-.game-cart-games .game .game-info span {
+.games .game .game-info span {
   margin-left: 0.5rem;
 }
 
-.game-cart-games .game .game-info .numbers {
+.games .game .game-info .numbers {
   display: grid;
   grid-template-columns: repeat(11, 1rem);
   grid-auto-rows: 1rem;
@@ -67,39 +99,44 @@
   font-size: 0.7rem;
 }
 
-.game-cart-games .game .game-info .name-and-price {
+.games .game .game-info .name-and-price {
   font-size: 1rem;
   color: var(--numbers-color);
 }
 
-.game-cart-games button {
+.games button {
   background-color: transparent;
   border: none;
 }
 
-.game-cart-games p {
+.games p {
   width: 100%;
 }
 
-.game-cart-total {
+.game-info {
+  border-radius: 3px;
+} 
+
+.cart-total {
   display: flex;
   justify-content: baseline;
   padding-left: 1rem;
+  margin-top: 1rem;
   color: var(--text-color);
   font-size: 1.4rem;
   margin-bottom: 1.5rem;
 }
 
-.game-cart-total p strong {
+.cart-total p strong {
   font-style: italic;
 }
 
-.game-cart .cart .game-cart-total {
+.game-cart .cart .cart-total {
   font-style: normal;
   font-weight: normal;
 }
 
-.game-cart-total span {
+.cart-total span {
   padding-left: 0.5rem;
 }
 
