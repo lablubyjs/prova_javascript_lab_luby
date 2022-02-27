@@ -4,10 +4,10 @@ header {
   justify-content: space-between;
   align-items: center;
   text-align: center;
+  border-bottom: 2px solid var(--border-color);
   height: 4rem;
-  border-bottom: 1px solid var(--border-color);
-  font-size: 20px;
   font-weight: bold;
+  font-size: 20px;
   font-style: italic;
 }
 
@@ -18,9 +18,16 @@ header .left {
 }
 
 header .left #tgl {
-  border-bottom: 6px solid var(--border-color-tgl);
-  border-radius: 5px;
   font-size: 44px;
+  padding-top: 0.2rem;
+}
+
+header .left #tgl hr {
+  width: 6.5rem;
+  height: 0.45rem;
+  background-color: var(--border-color-tgl);
+  border: none;
+  border-radius: 6px;
   padding-top: 0.2rem;
 }
 
@@ -38,10 +45,14 @@ footer {
 }
 
 footer {
-  font-weight: normal;
+  border-top: 2px solid var(--border-color);
+  height: 1px;
+  padding: 2rem;
+}
+
+footer p {
   font-style: normal;
   text-align: center;
   font-size: 15px;
-  border-top: 1px solid var(--border-color);
-  padding: 2rem;
 }
+
