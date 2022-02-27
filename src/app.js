@@ -55,6 +55,7 @@
                $button.style.borderColor = games.types[type].color;
                $button.style.color = games.types[type].color;
 
+
                app.games['buttons'].push({
                   id: type,
                   button: $button,
@@ -62,13 +63,30 @@
                   isSelected: false
                });
 
+               if (type == 0) {
+                  this.gameAtributes(
+                     games.types[type].type,
+                     games.types[type].range,
+                     games.types[type].price,
+                     games.types[type]['max-number'],
+                     games.types[type].color
+                  )
+                  
+                  app.games['buttons'][type].isSelected = true;
+                  this.setButtonsGamesColor();
+                  this.setDescriptionGame(games.types[type].description);
+                  this.setRangeGame(games.types[type].range);
+                  $spanGameName.textContent = games.types[type].type
+               }
+
                $button.addEventListener('click', () => {
-                  this.gameName = games.types[type].type;
-                  this.gameRange = games.types[type].range;
-                  this.gamePrice = games.types[type].price;
-                  this.gameMaxNumber = games.types[type]['max-number'];
-                  this.gameColor = games.types[type].color;
-                  this.gameNumbers = Array();
+                  this.gameAtributes(
+                     games.types[type].type,
+                     games.types[type].range,
+                     games.types[type].price,
+                     games.types[type]['max-number'],
+                     games.types[type].color
+                  )
 
                   app.games['buttons'].forEach((element, index) => {
                      if (element['id'] === type) {
@@ -89,6 +107,15 @@
                $buttonsGames.appendChild($button);
             }
 
+         },
+
+         gameAtributes: function (type, range, price, maxNumber, color) {
+            this.gameNumbers = Array();
+            this.gameName = type;
+            this.gameRange = range;
+            this.gamePrice = price;
+            this.gameMaxNumber = maxNumber;
+            this.gameColor = color;
          },
 
          setButtonsGamesColor: function () {
@@ -234,9 +261,11 @@
                $gameName.style.fontStyle = 'italic';
                $gameName.style.textTransform = 'capitalize';
 
-               $gameInfo.style.borderLeft = `3px solid ${app.gameColor}`;
+               $gameInfo.style.borderLeft = `4px solid ${app.gameColor}`;
 
                $gamePrice.textContent = `${app.convertNumberToReal(app.gamePrice)}`;
+               $gamePrice.style.fontStyle = 'normal';
+               $gamePrice.style.fontWeight = 'normal';
 
                $gameNameAndPrice.appendChild($gameName);
                $gameNameAndPrice.appendChild($gamePrice);
