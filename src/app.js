@@ -27,7 +27,7 @@
          },
 
          getAllGames: function () {
-            let ajax = new XMLHttpRequest();
+            const ajax = new XMLHttpRequest();
 
             ajax.open('GET', '../src/games.json', true);
             ajax.send();
@@ -37,18 +37,18 @@
          getGames: function () {
             if (!app.isReady.call(this)) return;
 
-            let data = JSON.parse(this.responseText);
+            const data = JSON.parse(this.responseText);
 
             app.setButtonsGames(data);
          },
 
          setButtonsGames: function (data) {
-            let $buttonsGames = $('[data-js="buttons-games"]').get();
-            let $spanGameName = $('[data-js="game-name"]').get();
-            let games = data;
+            const $buttonsGames = $('[data-js="buttons-games"]').get();
+            const $spanGameName = $('[data-js="game-name"]').get();
+            const games = data;
 
             for (let type in games.types) {
-               let $button = document.createElement('button');
+               const $button = document.createElement('button');
 
                $button.textContent = games.types[type].type;
                $button.style.borderColor = games.types[type].color;
@@ -61,10 +61,6 @@
                   this.gameMaxNumber = games.types[type]['max-number'];
                   this.gameColor = games.types[type].color;
                   this.gameNumbers = Array();
-
-                  app.isNotSelected($button.parentNode.children[0], '#7F3992');
-                  app.isNotSelected($button.parentNode.children[1], '#01AC66');
-                  app.isNotSelected($button.parentNode.children[2], '#F79C31');
 
                   app.isSelected($button);
 
@@ -80,16 +76,16 @@
          },
 
          setDescriptionGame: function (description) {
-            let $descriptionGame = $('[data-js="description-game"]').get();
+            const $descriptionGame = $('[data-js="description-game"]').get();
             $descriptionGame.innerHTML = description
          },
 
          setRangeGame: function (range) {
-            let $buttonsGameRange = $('[data-js="buttons-game-range"]').get();
+            const $buttonsGameRange = $('[data-js="buttons-game-range"]').get();
             $buttonsGameRange.innerHTML = ''
 
             for (let i = 0; i < range; i++) {
-               let $buttonNumber = document.createElement('button');
+               const $buttonNumber = document.createElement('button');
 
                $buttonNumber.textContent = i + 1;
                $buttonNumber.value = i + 1;
@@ -135,7 +131,7 @@
          },
 
          setCompleteGame: function () {
-            let $buttonCompleteGame = $('[data-js="complete-game"]').get();
+            const $buttonCompleteGame = $('[data-js="complete-game"]').get();
 
             $buttonCompleteGame.addEventListener('click', this.completeGame);
          },
@@ -144,10 +140,10 @@
             if (app.gameNumbers.length < app.gameMaxNumber) {
 
                while (app.gameNumbers.length < app.gameMaxNumber) {
-                  let number = Math.floor((Math.random() * app.gameRange) + 1);
+                  const number = Math.floor((Math.random() * app.gameRange) + 1);
 
                   if (app.gameNumbers.indexOf(number) === -1) {
-                     let $button = document.getElementById(`${number}`);
+                     const $button = document.getElementById(`${number}`);
                      app.gameNumbers.push(number);
                      app.isSelected($button);
                   }
@@ -160,13 +156,13 @@
          },
 
          setClearGame: function () {
-            let $buttonClearGame = $('[data-js="clear-game"]').get();
+            const $buttonClearGame = $('[data-js="clear-game"]').get();
             $buttonClearGame.addEventListener('click', this.clearGame);
          },
 
          clearGame: function () {
             for (let i = 0; i < app.gameNumbers.length; i++) {
-               let $button = document.getElementById(`${app.gameNumbers[i]}`);
+               const $button = document.getElementById(`${app.gameNumbers[i]}`);
                app.isNotSelected($button);
             };
 
@@ -174,21 +170,21 @@
          },
 
          setAddToCartGame: function () {
-            let $buttonAddToCart = $('[data-js="cart-game"]').get();
+            const $buttonAddToCart = $('[data-js="cart-game"]').get();
             $buttonAddToCart.addEventListener('click', this.addToCart);
          },
 
          addToCart: function () {
             if (app.gameNumbers.length === app.gameMaxNumber) {
 
-               let $cart = $('[data-js="games-in-cart"]').get();
-               let $game = document.createElement('div');
-               let $buttonDelete = app.createButtonDelete();
-               let $gameInfo = document.createElement('div');
-               let $gameNameAndPrice = document.createElement('div');
-               let $numbers = document.createElement('span');
-               let $gameName = document.createElement('span');
-               let $gamePrice = document.createElement('span');
+               const $cart = $('[data-js="games-in-cart"]').get();
+               const $game = document.createElement('div');
+               const $buttonDelete = app.createButtonDelete();
+               const $gameInfo = document.createElement('div');
+               const $gameNameAndPrice = document.createElement('div');
+               const $numbers = document.createElement('span');
+               const $gameName = document.createElement('span');
+               const $gamePrice = document.createElement('span');
 
                if (app.games[app.gameName] === undefined) {
                   app.createGame(app.gameName);
@@ -237,13 +233,13 @@
          },
 
          setTotalCart: function () {
-            let $cartTotal = $('[data-js="total-cart"]').get();
+            const $cartTotal = $('[data-js="total-cart"]').get();
             $cartTotal.innerHTML = `${app.convertNumberToReal(app.games.total)}`;
          },
 
          createButtonDelete: function () {
-            let $div = document.createElement('div');
-            let $button = document.createElement('button');
+            const $div = document.createElement('div');
+            const $button = document.createElement('button');
 
             $button.setAttribute('class', 'fa-solid fa-trash-can');
             $div.setAttribute('class', 'game-trash')
@@ -255,8 +251,8 @@
          },
 
          handleDeleteGame: function () {
-            let gameName = this.parentNode.parentNode.childNodes[1].childNodes[1].childNodes[0].textContent;
-            let $gamesInCart = $('[data-js="games-in-cart"]').get();
+            const gameName = this.parentNode.parentNode.childNodes[1].childNodes[1].childNodes[0].textContent;
+            const $gamesInCart = $('[data-js="games-in-cart"]').get();
 
             $gamesInCart.removeChild(this.parentNode.parentNode);
 
@@ -266,12 +262,12 @@
          },
 
          setButtonSave: function () {
-            let $buttonSave = $('[data-js="save"]').get();
+            const $buttonSave = $('[data-js="save"]').get();
             $buttonSave.addEventListener('click', this.toSave);
          },
 
          toSave: function () {
-            let confirmBuy = confirm('Deseja finalizar os jogos?');
+            const confirmBuy = confirm('Deseja finalizar os jogos?');
             if (confirmBuy) {
                alert('Compra realizada com sucesso! Obrigada.')
             }
@@ -280,7 +276,7 @@
 
          createSpanNumbers: function (button) {
             for (let i = 0; i < app.gameNumbers.length; i++) {
-               let $number = document.createElement('span');
+               const $number = document.createElement('span');
                if (i < app.gameNumbers.length - 1)
                   $number.textContent = `${app.gameNumbers[i]}, `;
                else
