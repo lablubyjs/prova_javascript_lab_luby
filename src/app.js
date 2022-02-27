@@ -215,6 +215,8 @@
                const $gameName = document.createElement('span');
                const $gamePrice = document.createElement('span');
 
+               $cart.querySelector('.cart-empty').style.display = 'none';
+
                if (app.games[app.gameName] === undefined) {
                   app.createGame(app.gameName);
                } else {
@@ -262,7 +264,7 @@
          },
 
          setTotalCart: function () {
-            const $cartTotal = $('[data-js="total-cart"]').get();
+            const $cartTotal = $('[data-js="total"]').get();
             $cartTotal.innerHTML = `${app.convertNumberToReal(app.games.total)}`;
          },
 
@@ -281,11 +283,16 @@
 
          handleDeleteGame: function () {
             const gameName = this.parentNode.parentNode.childNodes[1].childNodes[1].childNodes[0].textContent;
+            const $cart = $('[data-js="games-in-cart"]').get()
             const $gamesInCart = $('[data-js="games-in-cart"]').get();
 
             $gamesInCart.removeChild(this.parentNode.parentNode);
 
             app.games.total -= app.games[gameName].Price;
+
+            if (app.games.total === 0) {
+               $cart.querySelector('.cart-empty').style.display = 'block';
+            }
 
             app.setTotalCart();
          },
