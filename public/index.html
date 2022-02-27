@@ -20,7 +20,10 @@
   <body>
     <header>
       <div class="left">
-        <a id="tgl">TGL </a>
+        <a id="tgl"
+          >TGL
+          <hr />
+        </a>
         <a>Home</a>
       </div>
       <div class="right">
@@ -31,19 +34,19 @@
 
     <main>
       <section class="game-bar">
-        <div class="info-game-bar">
-          <h1>
+        <div class="info">
+          <h1 class="new-bet">
             <strong>new</strong> bet for <span data-js="game-name"></span>
           </h1>
           <h3>Choose a game</h3>
-          <div class="buttons-game" data-js="buttons-games"></div>
+          <div class="buttons-games" data-js="buttons-games"></div>
           <span>Fill your bet</span>
           <p data-js="description-game"></p>
         </div>
 
-        <div class="buttons-game-range" data-js="buttons-game-range"></div>
+        <div class="game-range" data-js="game-range"></div>
 
-        <div class="buttons-game-bar-settings">
+        <div class="game-bar-settings">
           <div>
             <button data-js="complete-game" id="complete-game">
               Complete game
@@ -61,15 +64,20 @@
 
       <section class="game-cart">
         <div class="cart">
-          <div class="game-cart-info">
+          <div class="info">
             <h1>Cart</h1>
           </div>
 
-          <div class="game-cart-games" data-js="games-in-cart"></div>
+          <div class="games" data-js="games-in-cart">
+            <div class="cart-empty">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <p>Your cart is empty!</p>
+            </div>
+          </div>
 
-          <div class="game-cart-total">
+          <div class="cart-total">
             <p><strong>CART</strong> Total</p>
-            <span data-js="total-cart"></span>
+            <span data-js="total"></span>
           </div>
 
           <div class="cart-save">
