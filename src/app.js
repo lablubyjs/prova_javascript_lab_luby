@@ -71,7 +71,7 @@
                      games.types[type]['max-number'],
                      games.types[type].color
                   )
-                  
+
                   app.games['buttons'][type].isSelected = true;
                   this.setButtonsGamesColor();
                   this.setDescriptionGame(games.types[type].description);
@@ -247,6 +247,11 @@
                if (app.games[app.gameName] === undefined) {
                   app.createGame(app.gameName);
                } else {
+
+                  if (app.games[app.gameName].Games.length >= 4) {
+                     $cart.style.overflowY = 'auto';
+                  }
+
                   app.games[app.gameName].Games.push(app.gameNumbers);
                }
 
