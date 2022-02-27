@@ -259,7 +259,9 @@
             }
 
             else {
-               alert('Complete o jogo para adicionar ao carrinho')
+               alert(
+                  `Complete o jogo antes de adicionar ao carrinho!\nPor favor, escolha ${app.gameMaxNumber - app.gameNumbers.length} números para completar o jogo.`
+               )
             }
          },
 
