@@ -17,15 +17,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Helvetica Neue";
+  font-family: "Helvetica Neue", sans-serif;
 }
 
 body {
-  width: 100vw;
   background-color: var(--background-color);
 }
 
 main {
+  width: 100vw;
+  height: 100vh;
   display: grid;
   grid-template-columns: 2fr 1fr;
   padding-top: 2rem;
