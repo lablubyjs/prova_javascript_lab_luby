@@ -46,67 +46,80 @@
          setButtonsGames: function (data) {
             const $buttonsGames = $('[data-js="buttons-games"]').get();
             const $spanGameName = $('[data-js="game-name"]').get();
-            const games = data;
 
-            for (let type in games.types) {
-               const $button = document.createElement('button');
+            Object.keys(data).forEach((element, index) => {
+               if (index === 1) {
 
-               $button.textContent = games.types[type].type;
-               $button.style.borderColor = games.types[type].color;
-               $button.style.color = games.types[type].color;
+                  data[element].forEach((games, type) => {
 
+                     const $button = document.createElement('button');
 
-               app.games['buttons'].push({
-                  id: type,
-                  button: $button,
-                  color: games.types[type].color,
-                  isSelected: false
-               });
+                     $button.textContent = games.type;
+                     $button.style.borderColor = games.color;
+                     $button.style.color = games.color;
 
-               if (type == 0) {
-                  this.gameAtributes(
-                     games.types[type].type,
-                     games.types[type].range,
-                     games.types[type].price,
-                     games.types[type]['max-number'],
-                     games.types[type].color
-                  )
+                     app.addButton('buttons', type, games.type, $button, games.color, false);
 
-                  app.games['buttons'][type].isSelected = true;
-                  this.setButtonsGamesColor();
-                  this.setDescriptionGame(games.types[type].description);
-                  this.setRangeGame(games.types[type].range);
-                  $spanGameName.textContent = games.types[type].type
+                     if (type === 0) {
+
+                        this.gameAtributes(
+                           games.type,
+                           games.range,
+                           games.price,
+                           games['max-number'],
+                           games.color
+                        )
+
+                        app.games['buttons'][type].isSelected = true;
+                        this.setButtonsGamesColor();
+                        this.setDescriptionGame(games.description);
+                        this.setRangeGame(games.range);
+                        $spanGameName.textContent = games.type
+                     }
+
+                     $button.addEventListener('click', () => {
+
+                        this.gameAtributes(
+                           games.type,
+                           games.range,
+                           games.price,
+                           games['max-number'],
+                           games.color
+                        )
+
+                        app.games['buttons'].forEach((element, index) => {
+                           if (element['id'] === type) {
+                              app.games['buttons'][index].isSelected = true;
+                           }
+                           else {
+                              app.games['buttons'][index].isSelected = false;
+                           }
+                        });
+
+                        $spanGameName.textContent = games.type;
+
+                        this.setButtonsGamesColor();
+                        this.setDescriptionGame(games.description);
+                        this.setRangeGame(games.range);
+                     });
+
+                     $buttonsGames.appendChild($button);
+
+                  })
                }
+            })
 
-               $button.addEventListener('click', () => {
-                  this.gameAtributes(
-                     games.types[type].type,
-                     games.types[type].range,
-                     games.types[type].price,
-                     games.types[type]['max-number'],
-                     games.types[type].color
-                  )
 
-                  app.games['buttons'].forEach((element, index) => {
-                     if (element['id'] === type) {
-                        app.games['buttons'][index].isSelected = true;
-                     }
-                     else {
-                        app.games['buttons'][index].isSelected = false;
-                     }
-                  });
+         },
 
-                  $spanGameName.textContent = games.types[type].type;
-
-                  this.setButtonsGamesColor();
-                  this.setDescriptionGame(games.types[type].description);
-                  this.setRangeGame(games.types[type].range);
-               });
-
-               $buttonsGames.appendChild($button);
-            }
-
+         addButton: function (key, id, gameName, button, color, isSelected) {
+            app.games[key].push({
+               id: id,
+               gameName: gameName,
+               button: button,
+               color: color,
+               isSelected: isSelected
+            });
          },
 
          gameAtributes: function (type, range, price, maxNumber, color) {
@@ -217,10 +230,11 @@
          },
 
          clearGame: function () {
-            for (let i = 0; i < app.gameNumbers.length; i++) {
-               const $button = document.getElementById(`${app.gameNumbers[i]}`);
+
+            app.gameNumbers.forEach((element) => {
+               const $button = document.getElementById(`${element}`);
                app.isNotSelected($button);
-            };
+            })
 
             app.gameNumbers = [];
          },
@@ -247,8 +261,7 @@
                if (app.games[app.gameName] === undefined) {
                   app.createGame(app.gameName);
                } else {
-
-                  if (app.games[app.gameName].Games.length >= 4) {
+                  if (app.games[app.gameName].Games.length >= 3) {
                      $cart.style.overflowY = 'auto';
                   }
 
@@ -293,8 +306,9 @@
             }
 
             else {
+               const missing = app.gameMaxNumber - app.gameNumbers.length;
                alert(
-                  `Complete o jogo antes de adicionar ao carrinho!\nPor favor, escolha ${app.gameMaxNumber - app.gameNumbers.length} números para completar o jogo.`
+                  `Complete o jogo antes de adicionar ao carrinho!\nPor favor, escolha ${missing} ${(missing) > 1 ? 'números' : 'número'} para completar o jogo.`
                )
             }
          },
@@ -319,12 +333,15 @@
 
          handleDeleteGame: function () {
             const gameName = this.parentNode.parentNode.childNodes[1].childNodes[1].childNodes[0].textContent;
+            let gameNumbers = this.parentNode.parentNode.childNodes[1].childNodes[0].childNodes[0].textContent;
             const $cart = $('[data-js="games-in-cart"]').get()
             const $gamesInCart = $('[data-js="games-in-cart"]').get();
 
             $gamesInCart.removeChild(this.parentNode.parentNode);
 
             app.games.total -= app.games[gameName].Price;
+
+            app.games[gameName].Games.splice(app.games[gameName].Games.indexOf([gameNumbers]));
 
             if (app.games.total === 0) {
                $cart.querySelector('.cart-empty').style.display = 'block';
@@ -336,25 +353,6 @@
          setButtonSave: function () {
             const $buttonSave = $('[data-js="save"]').get();
             $buttonSave.addEventListener('click', this.toSave);
-         },
-
-         toSave: function () {
-            const confirmBuy = confirm('Deseja finalizar os jogos?');
-            if (confirmBuy) {
-               alert('Compra realizada com sucesso! Obrigada.')
-            }
-            return app.games;
-         },
-
-         createSpanNumbers: function (button) {
-            for (let i = 0; i < app.gameNumbers.length; i++) {
-               const $number = document.createElement('span');
-               if (i < app.gameNumbers.length - 1)
-                  $number.textContent = `${app.gameNumbers[i]}, `;
-               else
-                  $number.textContent = app.gameNumbers[i];
-               button.appendChild($number);
-            }
          },
 
          sortGameNumbers: function () {
@@ -375,7 +373,27 @@
 
          convertNumberToReal: function (number) {
             return number.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
-         }
+         },
+
+         toSave: function () {
+            if (app.games.total === 0) {
+               return alert('O carrinho está vazio! Por favor, adicione jogos antes de salvar.')
+            }
+            const confirmBuy = confirm('Deseja finalizar os jogos?');
+            if (confirmBuy) {
+               alert('Compra realizada com sucesso! Obrigada.')
+            }
+            console.log(app.games);
+         },
+
+         createSpanNumbers: function (span) {
+            for (let i = 0; i < app.gameNumbers.length; i++) {
+               if (i < app.gameNumbers.length - 1)
+                  span.textContent += `${app.gameNumbers[i]}, `;
+               else
+                  span.textContent += app.gameNumbers[i];
+            }
+         },
 
       }
    })();
