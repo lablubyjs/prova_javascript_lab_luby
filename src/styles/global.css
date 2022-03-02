@@ -28,7 +28,6 @@ body {
 }
 
 main {
-  width: 100vw;
   display: grid;
   grid-template-columns: 2fr 1fr;
   padding-top: 2rem;
