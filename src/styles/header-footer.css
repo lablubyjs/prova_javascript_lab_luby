@@ -45,14 +45,17 @@ footer {
 }
 
 footer {
+  margin-top: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 50px;
   border-top: 2px solid var(--border-color);
-  height: 1px;
   padding: 2rem;
 }
 
 footer p {
   font-style: normal;
-  text-align: center;
   font-size: 15px;
 }
 

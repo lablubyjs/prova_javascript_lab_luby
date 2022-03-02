@@ -22,15 +22,16 @@
 
 body {
   background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 main {
   width: 100vw;
-  height: 100vh;
   display: grid;
   grid-template-columns: 2fr 1fr;
   padding-top: 2rem;
-  width: 100%;
   min-height: 31.25rem;
 }
 

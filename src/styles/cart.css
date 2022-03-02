@@ -61,7 +61,7 @@
 
 .games .game {
   display: grid;
-  grid-template-columns: 1fr 2.5fr 1fr;
+  grid-template-columns: 1fr 10fr;
   justify-content: space-between;
   margin-top: 1rem;
 }
@@ -87,16 +87,9 @@
 }
 
 .games .game .game-info .numbers {
-  display: grid;
-  grid-template-columns: repeat(11, 1rem);
-  grid-auto-rows: 1rem;
-  align-content: center;
-  align-items: start;
-  justify-content: center;
-  justify-items: center;
   color: var(--numbers-color);
   width: 100%;
-  font-size: 0.7rem;
+  font-size: 0.93rem;
 }
 
 .games .game .game-info .name-and-price {

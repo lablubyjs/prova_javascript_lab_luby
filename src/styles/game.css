@@ -1,4 +1,5 @@
 .game-bar {
+  width: 100%;
   padding-left: 5rem;
   color: var(--text-color);
 }
@@ -22,8 +23,8 @@
   font-weight: normal;
 }
 
-.info p {
-  text-transform: capitalize;
+.game-bar .info p {
+  width: 99%;
 }
 
 .game-bar .info h3 {
@@ -87,6 +88,7 @@ p {
 }
 
 .game-bar-settings {
+  width: 97%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
